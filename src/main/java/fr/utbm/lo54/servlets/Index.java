@@ -3,6 +3,7 @@ package fr.utbm.lo54.servlets;
 import fr.utbm.lo54.beans.Location;
 import fr.utbm.lo54.repository.LocationDAO;
 import fr.utbm.lo54.service.CourseSessionService;
+import fr.utbm.lo54.service.CourseService;
 import fr.utbm.lo54.service.LocationService;
 
 import javax.persistence.EntityManager;
@@ -23,6 +24,8 @@ public class Index extends HttpServlet {
         List<?> location= new LocationService().listCities();
         List<?> courseSessions = new CourseSessionService().listCourseSessions();
         req.setAttribute("location", location);
+        List<?> course= new CourseService().listCourses();
+        req.setAttribute("course", course);
         req.setAttribute("course_session", courseSessions);
         this.getServletContext().getRequestDispatcher("/WEB-INF/index.jsp").forward(req, resp);
     }
