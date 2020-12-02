@@ -10,4 +10,9 @@ public class CourseSessionService {
         CourseSessionDAO courseSessionDAO = new CourseSessionDAO();
         return courseSessionDAO.listCourseSessions();
     }
+
+    public CourseSession lectureCourseSessions(long id){
+        CourseSessionDAO courseSessionDAO = new CourseSessionDAO();
+        return courseSessionDAO.lectureCourseSessions(id);
+    }
 }

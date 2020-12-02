@@ -17,4 +17,11 @@ public class CourseSessionDAO {
         sessions = (List<CourseSession>) entityManager.createQuery("from CourseSession").getResultList();
         return sessions;
     }
+
+    public CourseSession lectureCourseSessions(long id) {
+        CourseSession sessions = new CourseSession();
+        entityManager = entityManagerFactory.createEntityManager();
+        sessions = (CourseSession) entityManager.createQuery("from CourseSession where id=?1").setParameter(1,id).getSingleResult();
+        return sessions;
+    }
 }

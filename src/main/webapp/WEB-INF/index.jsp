@@ -16,7 +16,7 @@
                 <th>Inscription</th>
             </tr>
         </thead>
-        <tbody>
+        <body>
         <c:forEach var="cours" items="${ course }">
             <c:forEach var="session" items="${ cours.sessions }">
                 <tr>
@@ -30,7 +30,7 @@
                         <c:out value="${session.location.city}"/>
                     </td>
                     <td>
-                        <a href="/LO54/Inscription/${session.id}">Inscription</a>
+                        <a href="/LO54/Inscriptions?id=${session.id}">Inscription</a>
                     </td>
                 </tr>
         </c:forEach>
