@@ -33,3 +33,10 @@ public class Index extends HttpServlet {
         this.getServletContext().getRequestDispatcher("/WEB-INF/index.jsp").forward(req, resp);
     }
 }
+
+/*TODO
+* Vérifier date passée
+* Faire filtres
+*
+*
+* */
