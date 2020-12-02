@@ -6,13 +6,14 @@
     <meta charset="utf8">
 </head>
 <body>
-    <c:forEach var="localisation" items="${ location }"> <c:out value="${localisation.city}"/> </c:forEach>
-    <c:forEach var="cours" items="${ course }"><c:out value="${cours.code }"/><c:out value="${ cours.title}"/> </c:forEach>
-    <c:forEach var="session" items="${ course_session }">
+    <p><c:forEach var="localisation" items="${ location }"> <c:out value="${localisation.city}"/> </c:forEach></p>
+    <p><c:forEach var="cours" items="${ course }"><c:out value="${cours.code }"/><c:out value="${ cours.title}"/> </c:forEach></p>
+    <p><c:forEach var="session" items="${ course_session }">
         <c:out value="${session.start_date}"/>
         <c:out value="${session.location.city}"/>
         <c:out value="${session.course.code}"/>
-    </c:forEach>
+    </c:forEach></p>
+    <c:forEach var="utilisateur" items="${ user }"> <c:out value="${utilisateur.id}"/> </c:forEach>
     <p></p>
 </body>
 </html>

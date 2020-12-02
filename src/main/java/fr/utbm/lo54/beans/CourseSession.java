@@ -31,6 +31,7 @@ public class CourseSession implements Serializable {
     @JoinColumn(name = "LOCATION_ID")
     private Location location;
 
+
     public long getId() {
         return id;
     }

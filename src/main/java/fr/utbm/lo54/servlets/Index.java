@@ -5,6 +5,7 @@ import fr.utbm.lo54.repository.LocationDAO;
 import fr.utbm.lo54.service.CourseSessionService;
 import fr.utbm.lo54.service.CourseService;
 import fr.utbm.lo54.service.LocationService;
+import fr.utbm.lo54.service.UserService;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -26,6 +27,8 @@ public class Index extends HttpServlet {
         req.setAttribute("location", location);
         List<?> course= new CourseService().listCourses();
         req.setAttribute("course", course);
+        List<?> user= new UserService().listUsers();
+        req.setAttribute("user", user);
         req.setAttribute("course_session", courseSessions);
         this.getServletContext().getRequestDispatcher("/WEB-INF/index.jsp").forward(req, resp);
     }
