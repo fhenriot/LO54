@@ -37,6 +37,14 @@ public class Location implements Serializable {
         this.city = city;
     }
 
+    public List<CourseSession> getSessions() {
+        return sessions;
+    }
+
+    public void setSessions(List<CourseSession> sessions) {
+        this.sessions = sessions;
+    }
+
     public Location(long id, String city) {
         this.id = id;
         this.city = city;

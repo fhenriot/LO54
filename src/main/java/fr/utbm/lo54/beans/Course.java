@@ -33,4 +33,12 @@ public class Course implements Serializable {
     public void setTitle(String title) {
         this.title = title;
     }
+
+    public List<CourseSession> getSessions() {
+        return sessions;
+    }
+
+    public void setSessions(List<CourseSession> sessions) {
+        this.sessions = sessions;
+    }
 }
