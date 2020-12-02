@@ -2,6 +2,7 @@ package fr.utbm.lo54.beans;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.List;
 
 @Entity
 @Table(name="location")
@@ -16,6 +17,9 @@ public class Location implements Serializable {
 
     @Column(name = "CITY")
     private String city;
+
+    @OneToMany(mappedBy = "location", cascade = CascadeType.ALL)
+    private List<CourseSession> sessions;
 
     public long getId() {
         return id;

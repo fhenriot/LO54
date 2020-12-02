@@ -7,6 +7,11 @@
 </head>
 <body>
     <c:forEach var="localisation" items="${ location }"> <c:out value="${localisation.city}"/> </c:forEach>
+    <c:forEach var="session" items="${ course_session }">
+        <c:out value="${session.start_date}"/>
+        <c:out value="${session.location.city}"/>
+        <c:out value="${session.course.code}"/>
+    </c:forEach>
     <p></p>
 </body>
 </html>
