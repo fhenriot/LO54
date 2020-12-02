@@ -1,10 +1,11 @@
 package fr.utbm.lo54.beans;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 @Entity
 @Table(name="location")
-public class location {
+public class Location implements Serializable {
 
     private static final long serialVersionUID=1L;
 
@@ -32,11 +33,11 @@ public class location {
         this.city = city;
     }
 
-    public location(long id, String city) {
+    public Location(long id, String city) {
         this.id = id;
         this.city = city;
     }
 
-    public location() {
+    public Location() {
     }
 }
