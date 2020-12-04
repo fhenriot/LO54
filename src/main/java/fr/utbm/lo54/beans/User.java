@@ -30,6 +30,18 @@ public class User implements Serializable{
     @JoinColumn(name = "COURSE_SESSION_ID")
     private CourseSession course_session;
 
+    public User(String last_name, String first_name, String address, String phone, String email, CourseSession course_session) {
+        this.last_name = last_name;
+        this.first_name = first_name;
+        this.address = address;
+        this.phone = phone;
+        this.email = email;
+        this.course_session = course_session;
+    }
+
+    public User(){
+
+    }
 
     public long getId() {
         return id;
@@ -86,5 +98,6 @@ public class User implements Serializable{
     public void setCourse_session(CourseSession course_session) {
         this.course_session = course_session;
     }
+
 
 }

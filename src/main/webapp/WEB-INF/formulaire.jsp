@@ -13,7 +13,7 @@
     <d:formatDate value="${session.start_date }" pattern="dd/MM/yyyy"/><br>
     <d:formatDate value="${session.end_date }" pattern="dd/MM/yyyy"/><br>
     <c:out value="${session.location.city}"/><br>
-    <c:out value="${pourcentage}"/>
+    <c:out value="${pourcentage} %" />
 </div>
 <div>
 <form action="/LO54/Inscriptions?id=${session.id}" method="post">
@@ -31,7 +31,7 @@
     </div>
     <div>
             <label for="phone">Numéro de téléphone :</label>
-            <input type="text" id="phone" name="user_mphone">
+            <input type="text" id="phone" name="user_phone">
         </div>
     <div>
         <label for="mail">e-mail :</label>
