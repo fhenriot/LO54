@@ -1,0 +1,19 @@
+<?xml version="1.0" ?>
+<Configuration>
+    <Appenders>
+        <Console name="stdout" target="SYTEM_OUT">
+                <PatternLayout pattern="%d [%t] %-5level: %msg%n%throwable"></PatternLayout>
+        </Console>
+        <File name="log" fileName="target/logging.log">
+                <PatternLayout pattern="%d [%t] %-5level: %msg%n%throwable"></PatternLayout>
+        </File>
+    </Appenders>
+    <Loggers>
+        <Root level="ERROR">
+            <AppenderRef ref="stdout"/>
+        </Root>
+        <Logger name="fr" level="ERROR" additivity="false">
+            <AppenderRef ref="log"/>
+        </Logger>
+    </Loggers>
+</Configuration>
