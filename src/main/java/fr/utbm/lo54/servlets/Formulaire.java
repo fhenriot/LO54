@@ -6,6 +6,9 @@ import fr.utbm.lo54.service.CourseService;
 import fr.utbm.lo54.service.CourseSessionService;
 import fr.utbm.lo54.service.LocationService;
 import fr.utbm.lo54.service.UserService;
+import org.apache.logging.log4j.core.Filter;
+import org.apache.logging.log4j.core.config.builder.api.*;
+import org.apache.logging.log4j.core.config.builder.impl.BuiltConfiguration;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -39,7 +42,28 @@ public class Formulaire extends HttpServlet {
         long id= Long.parseLong(req.getParameter("id")) ;
         CourseSession courseSessions = new CourseSessionService().lectureCourseSessions(id);
         User inscription=new User(nom, prenom, adresse, telephone, email,courseSessions);
-        new UserService().inscriptionClient(inscription);
+        ConfigurationBuilder<BuiltConfiguration> builder = ConfigurationBuilderFactory.newConfigurationBuilder();
+
+        AppenderComponentBuilder console = builder.newAppender("stdout", "Console");
+        builder.add(console);
+
+        AppenderComponentBuilder file = builder.newAppender("log", "File");
+        file.addAttribute("fileName", "target/logging.log");
+        builder.add(file);
+        FilterComponentBuilder flow = builder.newFilter("MarkerFilter", Filter.Result.ACCEPT, Filter.Result.DENY);
+        flow.addAttribute("marker","FLOW");
+        LayoutComponentBuilder standard = builder.newLayout("PatternLayout");
+        standard.addAttribute("pattern", "%d [%t] %-5level: %msg%n%throwable");
+
+        console.add(standard);
+        file.add(standard);
+
+        RootLoggerComponentBuilder rootLogger = builder.newRootLogger(Level.ERROR);
+        rootLogger.add(builder.newAppenderRef("stdout"));
+
+        builder.add(rootLogger);
+
+//        new UserService().inscriptionClient(inscription);
         this.getServletContext().getRequestDispatcher("/WEB-INF/confirmation.jsp").forward(req, resp);
     }
 }
