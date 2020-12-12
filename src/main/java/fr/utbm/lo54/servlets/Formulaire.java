@@ -9,6 +9,7 @@ import fr.utbm.lo54.service.UserService;
 import org.apache.logging.log4j.core.Filter;
 import org.apache.logging.log4j.core.config.builder.api.*;
 import org.apache.logging.log4j.core.config.builder.impl.BuiltConfiguration;
+import org.apache.logging.log4j.Level;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
