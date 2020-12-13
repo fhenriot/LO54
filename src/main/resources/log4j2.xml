@@ -1,20 +1,22 @@
 <?xml version="1.0" ?>
 <Configuration>
     <Properties>
-        <Property name="basePath">F:\JAVAEE\src\main\resources\log/Property>
+        <Property name="LS">${sys:file.separator}</Property>
+        <Property name="basePath">${LS}home${LS}fabien${LS}.jee_logs${LS}</Property>
     </Properties>
 
     <Appenders>
         <Console name="stdout" target="SYTEM_OUT">
-                <PatternLayout pattern="%d [%t] %-5level: %msg%n%throwable"></PatternLayout>
+                <PatternLayout pattern="%d [%t] %-5level: %msg%n%throwable"/>
         </Console>
         <File name="log" fileName="${basePath}/logging.log" >
-                <PatternLayout pattern="%d [%t] %-5level: %msg%n%throwable"></PatternLayout>
+                <PatternLayout pattern="%d [%t] %-5level: %msg%n%throwable"/>
         </File>
     </Appenders>
     <Loggers>
         <Root level="ERROR">
             <AppenderRef ref="log"/>
+            <AppenderRef ref="stdout"/>
         </Root>
     </Loggers>
 </Configuration>
