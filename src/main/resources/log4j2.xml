@@ -2,7 +2,7 @@
 <Configuration>
     <Properties>
         <Property name="LS">${sys:file.separator}</Property>
-        <Property name="basePath">${LS}home${LS}fabien${LS}.jee_logs${LS}</Property>
+        <Property name="basePath">${LS}JEElogs</Property>
     </Properties>
 
     <Appenders>
