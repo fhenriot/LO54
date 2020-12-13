@@ -4,19 +4,61 @@
         <Property name="LS">${sys:file.separator}</Property>
         <Property name="basePath">${LS}JEElogs</Property>
     </Properties>
-
+    <Filters>
+    <MarkerFilter marker="APP" onMatch="ACCEPT" onMismatch="DENY"/>
+    </Filters>
     <Appenders>
-        <Console name="stdout" target="SYTEM_OUT">
-                <PatternLayout pattern="%d [%t] %-5level: %msg%n%throwable"/>
-        </Console>
-        <File name="log" fileName="${basePath}/logging.log" >
-                <PatternLayout pattern="%d [%t] %-5level: %msg%n%throwable"/>
+        <File name="logERROR" fileName="${basePath}/loggingERROR.log" >
+            <LevelRangeFilter minLevel="ERROR" maxLevel="ERROR" onMatch="ACCEPT" onMismatch="DENY"/>
+            <PatternLayout pattern="%d [%t] %-5level: %msg%n%throwable"/>
+        </File>
+        <File name="logDEBUG" fileName="${basePath}/loggingDEBUG.log" >
+            <LevelRangeFilter minLevel="DEBUG" maxLevel="DEBUG" onMatch="ACCEPT" onMismatch="DENY"/>
+            <PatternLayout pattern="%d [%t] %-5level: %msg%n%throwable"/>
+        </File>
+        <File name="logFATAL" fileName="${basePath}/loggingFATAL.log" >
+            <LevelRangeFilter minLevel="FATAL" maxLevel="FATAL" onMatch="ACCEPT" onMismatch="DENY"/>
+            <PatternLayout pattern="%d [%t] %-5level: %msg%n%throwable"/>
+        </File>
+        <File name="logWARN" fileName="${basePath}/loggingWARN.log" >
+            <LevelRangeFilter minLevel="WARN" maxLevel="WARN" onMatch="ACCEPT" onMismatch="DENY"/>
+            <PatternLayout pattern="%d [%t] %-5level: %msg%n%throwable"/>
+        </File>
+        <File name="logINFO" fileName="${basePath}/loggingINFO.log" >
+            <LevelRangeFilter minLevel="INFO" maxLevel="INFO" onMatch="ACCEPT" onMismatch="DENY"/>
+            <PatternLayout pattern="%d [%t] %-5level: %msg%n%throwable"/>
+        </File>
+        <File name="logTRACE" fileName="${basePath}/loggingTRACE.log" >
+            <LevelRangeFilter minLevel="TRACE" maxLevel="TRACE" onMatch="ACCEPT" onMismatch="DENY"/>
+            <PatternLayout pattern="%d [%t] %-5level: %msg%n%throwable"/>
         </File>
     </Appenders>
     <Loggers>
-        <Root level="ERROR">
-            <AppenderRef ref="log"/>
-            <AppenderRef ref="stdout"/>
+        <Root level="all">
+            <AppenderRef level="ERROR" ref="logERROR" />
+            <AppenderRef level="DEBUG" ref="logDEBUG" />
+            <AppenderRef level="FATAL" ref="logFATAL"/>
+            <AppenderRef level="WARN" ref="logWARN"/>
+            <AppenderRef level="INFO" ref="logINFO"/>
+            <AppenderRef level="TRACE" ref="logTRACE"/>
         </Root>
+<!--        <Root level="ERROR">-->
+<!--            <AppenderRef ref="logERROR"/>-->
+<!--        </Root>-->
+<!--        <Logger level="DEBUG" name="fr.utbm.lo54">-->
+<!--            <AppenderRef ref="logDEBUG"/>-->
+<!--        </Logger>-->
+<!--        <Logger level="FATAL" name="fr.utbm.lo54">-->
+<!--        <AppenderRef ref="logFATAL"/>-->
+<!--        </Logger>-->
+<!--        <Logger level="WARN" name="fr.utbm.lo54">-->
+<!--            <AppenderRef ref="logWARN"/>-->
+<!--        </Logger>-->
+<!--        <Logger level="INFO" name="fr.utbm.lo54">-->
+<!--            <AppenderRef ref="logINFO"/>-->
+<!--        </Logger>-->
+<!--        <Logger level="TRACE" name="fr.utbm.lo54">-->
+<!--            <AppenderRef ref="logTRACE"/>-->
+<!--        </Logger>-->
     </Loggers>
 </Configuration>

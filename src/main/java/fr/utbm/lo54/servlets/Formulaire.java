@@ -6,13 +6,11 @@ import fr.utbm.lo54.service.CourseService;
 import fr.utbm.lo54.service.CourseSessionService;
 import fr.utbm.lo54.service.LocationService;
 import fr.utbm.lo54.service.UserService;
+import org.apache.logging.log4j.*;
 import org.apache.logging.log4j.core.Filter;
-import org.apache.logging.log4j.Logger;
 import org.apache.logging.log4j.core.config.Configurator;
 import org.apache.logging.log4j.core.config.builder.api.*;
 import org.apache.logging.log4j.core.config.builder.impl.BuiltConfiguration;
-import org.apache.logging.log4j.Level;
-import org.apache.logging.log4j.LogManager;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -27,6 +25,7 @@ import java.util.List;
 @WebServlet(name="Inscriptions", urlPatterns = "/Inscriptions")
 public class Formulaire extends HttpServlet {
     private static final Logger LOGGER = LogManager.getLogger(Formulaire.class.getName());
+    private static final Marker APP = MarkerManager.getMarker("APP");
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         long id= Long.parseLong(req.getParameter("id")) ;
@@ -88,8 +87,13 @@ public class Formulaire extends HttpServlet {
 
 
 
-        LOGGER.error("grezmbvuiqgheuiorgoiuqsef bhguip");
-        LOGGER.debug("vbnbuifdbnwlkmhayzufdenahfsid,ugnhqeuifgqdzufbggqefoi^ghqeuivgp");
+        LOGGER.error(APP, "ERREUR");
+        LOGGER.debug(APP,"DEBUG GENTIL MONSIEUR");
+        LOGGER.warn(APP, "ATTENTION");
+        LOGGER.info(APP, "Informations");
+        LOGGER.trace(APP, "TRACE DE PNEU");
+        LOGGER.fatal(APP, "FATAL BAZOOKA");
+
 
         //        new UserService().inscriptionClient(inscription);
         this.getServletContext().getRequestDispatcher("/WEB-INF/confirmation.jsp").forward(req, resp);
