@@ -72,8 +72,5 @@ public class Index extends HttpServlet {
 }
 
 /*TODO
-* Vérifier date passée
-* Faire filtres
-*
 *
 * */

@@ -15,9 +15,12 @@ public class CourseSessionDAO {
     public List<CourseSession> listCourseSessions(){
         List<CourseSession> sessions = new ArrayList<>();
         entityManager = entityManagerFactory.createEntityManager();
-        sessions = (List<CourseSession>) entityManager.createQuery(
-                "from CourseSession order by course.code")
-                .getResultList();
+        Query q = entityManager.createQuery(
+                "from CourseSession " +
+                        "where start_date>=?1 " +
+                        "order by course.code");
+        q.setParameter(1, new Date());
+        sessions = q.getResultList();
         return sessions;
     }
 
@@ -29,15 +32,38 @@ public class CourseSessionDAO {
     }
 
     public List<CourseSession> listCourseSessions(String keyWord, Date date, String city) {
+        if (city == null) {
+            city="";
+        }
+        String whereCourse = "where ";
+        if (keyWord.length()>0 && city.length()>0) {
+            whereCourse+="course.title like CONCAT('%',?1,'%') or location.id=?2 or ";
+        }
+        else if (keyWord.length()>0){
+            whereCourse+="course.title like CONCAT('%',?2,'%') or ";
+        }
+        else if (city.length()>0){
+            whereCourse+="location.id=?2 or ";
+        }
+        whereCourse+="(start_date>=?3 and start_date<?4)";
         List<CourseSession> sessions = new ArrayList<>();
         entityManager = entityManagerFactory.createEntityManager();
         Query q = entityManager.createQuery(
                 "from CourseSession " +
-                        "where course.title like ?1 or start_date=?2 or location.id=?3" +
+                        whereCourse +
                         "order by course.code");
-        q.setParameter(1, keyWord);
-        q.setParameter(2, date);
-        q.setParameter(3, city);
+        if (keyWord.length()>0 && city.length()>0) {
+            q.setParameter(1, keyWord);
+            q.setParameter(2, Long.parseLong(city));
+        }
+        else if (keyWord.length()>0){
+            q.setParameter(2, keyWord);
+        }
+        else if (city.length()>0){
+            q.setParameter(2, Long.parseLong(city));
+        }
+        q.setParameter(3, date);
+        q.setParameter(4, new Date(date.getTime() + (1000 * 60 * 60 * 24)));
         sessions = (List<CourseSession>) q.getResultList();
         return sessions;
     }

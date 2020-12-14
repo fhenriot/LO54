@@ -16,14 +16,19 @@
           </div>
           <div>
             <label for="date">Date</label>
-            <input type="date" id="date" name="dateStart" onchange="document.getElementById('filterForm').submit();console.log(this.value);">
+            <input type="date" id="date" name="dateStart" value="<c:out value='${date}'/>" onchange="document.getElementById('filterForm').submit();console.log(this.value);">
           </div>
           <div>
             <label for="city">Ville</label>
             <select name="city" id="city" onchange="document.getElementById('filterForm').submit();console.log(this.value);">
-                <option value="" disabled selected >Sélectionnez une ville</option>
+                <option value="">Sélectionnez une ville</option>
                   <c:forEach var="ville" items="${location}">
-                    <option value="<c:out value='${ville.id}' />"><c:out value="${ville.city}" /></option>
+                    <c:if test="${ville.id == city}">
+                      <option value="<c:out value='${ville.id}' />" selected><c:out value="${ville.city}" /></option>
+                    </c:if>
+                    <c:if test="${ville.id != city}">
+                      <option value="<c:out value='${ville.id}' />"><c:out value="${ville.city}" /></option>
+                    </c:if>
                   </c:forEach>
             </select>
           </div>
