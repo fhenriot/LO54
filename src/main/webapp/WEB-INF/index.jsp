@@ -21,10 +21,10 @@
           <div>
             <label for="city">Ville</label>
             <select name="city" id="city" onchange="document.getElementById('filterForm').submit();console.log(this.value);">
-                         <option value="" disabled selected >Sélectionnez une ville</option>
-              <c:forEach var="ville" items="${location}">
-                <option value="<c:out value='${ville.id}' />"><c:out value="${ville.city}" /></option>
-              </c:forEach>
+                <option value="" disabled selected >Sélectionnez une ville</option>
+                  <c:forEach var="ville" items="${location}">
+                    <option value="<c:out value='${ville.id}' />"><c:out value="${ville.city}" /></option>
+                  </c:forEach>
             </select>
           </div>
         </form>

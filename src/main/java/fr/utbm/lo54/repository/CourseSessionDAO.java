@@ -47,10 +47,10 @@ public class CourseSessionDAO {
         entityManager = entityManagerFactory.createEntityManager();
         Query q = entityManager.createQuery(
                 "from CourseSession " +
-                        "where course.title=?1 or location.id=?2" +
+                        "where course.title like ?1 or location.id=?2" +
                         "order by course.code");
         q.setParameter(1, keyWord);
-        q.setParameter(2, city);
+        q.setParameter(2, Long.parseLong(city));
         sessions = (List<CourseSession>) q.getResultList();
         return sessions;
     }

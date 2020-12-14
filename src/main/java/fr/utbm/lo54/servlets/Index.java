@@ -44,8 +44,8 @@ public class Index extends HttpServlet {
         String sDate = req.getParameter("dateStart");
         String city = req.getParameter("city");
         List<?> courses = null;
-        if (sDate != null || sDate.length() > 0){
-            LOGGER.debug(APP, sDate==null + " OU " + sDate.length())
+        if (sDate.length() > 0){
+            LOGGER.debug(APP, sDate.length());
             LOGGER.debug(APP,sDate);
             LOGGER.debug(APP,"2020-11-12");
             try {
