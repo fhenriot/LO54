@@ -33,14 +33,8 @@ public class Index extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         List<?> location= new LocationService().listCities();
         req.setAttribute("location", location);
-//        List<?> course= new CourseService().listCourses();
-//        req.setAttribute("course", course);
+        List<?> courseSessions= new CourseSessionService().listCourseSessions();
         req.setAttribute("sessions", courseSessions);
-        List<?> user= new UserService().listUsers();
-        req.setAttribute("user", user);
-        req.setAttribute("course_session", courseSessions);
-        List<?> course= new CourseService().listCourses();
-        req.setAttribute("course", course);
         this.getServletContext().getRequestDispatcher("/WEB-INF/index.jsp").forward(req, resp);
     }
 
@@ -49,24 +43,27 @@ public class Index extends HttpServlet {
         String keyWord = req.getParameter("keyWord");
         String sDate = req.getParameter("dateStart");
         String city = req.getParameter("city");
-        List<?> courses;
-        courses = new CourseService().listCourses(keyWord);
+        List<?> courses = null;
         if (sDate != null || sDate.length() > 0){
+            LOGGER.debug(APP, sDate==null + " OU " + sDate.length())
             LOGGER.debug(APP,sDate);
             LOGGER.debug(APP,"2020-11-12");
             try {
                 Date date = new SimpleDateFormat("yyyy-MM-dd").parse(sDate);
                 req.setAttribute("date", sDate);
+                courses = new CourseSessionService().listCourseSessions(keyWord, date, city);
             } catch (ParseException e) {
                 LOGGER.error(APP,e.getMessage());
             }
-
+        }
+        else{
+            courses = new CourseSessionService().listCourseSessions(keyWord, city);
         }
 
 
         req.setAttribute("keyWord", keyWord);
         req.setAttribute("city", city);
-        req.setAttribute("course", courses);
+        req.setAttribute("sessions", courses);
         List<?> location= new LocationService().listCities();
         req.setAttribute("location", location);
         this.getServletContext().getRequestDispatcher("/WEB-INF/index.jsp").forward(req, resp);

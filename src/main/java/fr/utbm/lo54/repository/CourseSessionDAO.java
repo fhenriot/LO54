@@ -41,4 +41,17 @@ public class CourseSessionDAO {
         sessions = (List<CourseSession>) q.getResultList();
         return sessions;
     }
+
+    public List<?> listCourseSessions(String keyWord, String city) {
+        List<CourseSession> sessions = new ArrayList<>();
+        entityManager = entityManagerFactory.createEntityManager();
+        Query q = entityManager.createQuery(
+                "from CourseSession " +
+                        "where course.title=?1 or location.id=?2" +
+                        "order by course.code");
+        q.setParameter(1, keyWord);
+        q.setParameter(2, city);
+        sessions = (List<CourseSession>) q.getResultList();
+        return sessions;
+    }
 }

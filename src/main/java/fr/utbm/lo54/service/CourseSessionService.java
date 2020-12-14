@@ -21,4 +21,9 @@ public class CourseSessionService {
         CourseSessionDAO courseSessionDAO = new CourseSessionDAO();
         return courseSessionDAO.lectureCourseSessions(id);
     }
+
+    public List<?> listCourseSessions(String keyWord, String city) {
+        CourseSessionDAO courseSessionDAO = new CourseSessionDAO();
+        return courseSessionDAO.listCourseSessions(keyWord, city);
+    }
 }
