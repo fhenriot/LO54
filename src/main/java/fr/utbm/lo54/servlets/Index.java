@@ -25,8 +25,9 @@ public class Index extends HttpServlet {
         List<?> location= new LocationService().listCities();
         List<?> courseSessions = new CourseSessionService().listCourseSessions();
         req.setAttribute("location", location);
-        List<?> course= new CourseService().listCourses();
-        req.setAttribute("course", course);
+//        List<?> course= new CourseService().listCourses();
+//        req.setAttribute("course", course);
+        req.setAttribute("sessions", courseSessions);
         List<?> user= new UserService().listUsers();
         req.setAttribute("user", user);
         req.setAttribute("course_session", courseSessions);
