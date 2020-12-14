@@ -33,6 +33,12 @@ public class Index extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         List<?> location= new LocationService().listCities();
         req.setAttribute("location", location);
+//        List<?> course= new CourseService().listCourses();
+//        req.setAttribute("course", course);
+        req.setAttribute("sessions", courseSessions);
+        List<?> user= new UserService().listUsers();
+        req.setAttribute("user", user);
+        req.setAttribute("course_session", courseSessions);
         List<?> course= new CourseService().listCourses();
         req.setAttribute("course", course);
         this.getServletContext().getRequestDispatcher("/WEB-INF/index.jsp").forward(req, resp);
