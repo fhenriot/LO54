@@ -60,6 +60,13 @@
                     </td>
                 </tr>
             </c:forEach>
+            <c:if test="${empty sessions}">
+                <tr>
+                    <td colspan="4">
+                        Nous n'avons pas de données à afficher.. Essayez de changer les filtres ou revenez plus tard !
+                    </td>
+                </tr>
+            </c:if>
         </tbody>
     </table>
 </body>
