@@ -12,6 +12,7 @@ import org.apache.logging.log4j.core.config.Configurator;
 import org.apache.logging.log4j.core.config.builder.api.*;
 import org.apache.logging.log4j.core.config.builder.impl.BuiltConfiguration;
 
+import javax.persistence.NoResultException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -29,12 +30,17 @@ public class Formulaire extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         long id= Long.parseLong(req.getParameter("id")) ;
-        CourseSession courseSessions = new CourseSessionService().lectureCourseSessions(id);
-        req.setAttribute("session", courseSessions);
-        float nombreClients= new UserService().comptageClientsParSession(courseSessions);
-        System.out.println(nombreClients);
-        int pourcentage= Math.round((nombreClients/courseSessions.getMaximum())*100);
-        req.setAttribute("pourcentage", pourcentage);
+        try {
+            CourseSession courseSessions = new CourseSessionService().lectureCourseSessions(id);
+            req.setAttribute("session", courseSessions);
+            float nombreClients= new UserService().comptageClientsParSession(courseSessions);
+            int pourcentage= Math.round((nombreClients/courseSessions.getMaximum())*100);
+            req.setAttribute("pourcentage", pourcentage);
+            LOGGER.debug(APP,String.format("Nombre d'utilisateurs pour la session numéro %d:%d",courseSessions.getId(),(int)nombreClients));
+        }
+        catch (NoResultException e){
+            LOGGER.error(APP,e.getMessage());
+        }
         this.getServletContext().getRequestDispatcher("/WEB-INF/formulaire.jsp").forward(req, resp);
     }
 
@@ -47,59 +53,11 @@ public class Formulaire extends HttpServlet {
         long id= Long.parseLong(req.getParameter("id")) ;
         CourseSession courseSessions = new CourseSessionService().lectureCourseSessions(id);
         User inscription=new User(nom, prenom, adresse, telephone, email,courseSessions);
-
-//        ConfigurationBuilder<BuiltConfiguration> builder = ConfigurationBuilderFactory.newConfigurationBuilder();
-//
-//        AppenderComponentBuilder console = builder.newAppender("stdout", "Console");
-//        builder.add(console);
-//
-//        AppenderComponentBuilder file = builder.newAppender("log", "File");
-//        file.addAttribute("fileName", "target/logging.log");
-//        builder.add(file);
-//
-//        FilterComponentBuilder flow = builder.newFilter("MarkerFilter", Filter.Result.ACCEPT, Filter.Result.DENY);
-//        flow.addAttribute("marker","FLOW");
-//        LayoutComponentBuilder standard = builder.newLayout("PatternLayout");
-//        standard.addAttribute("pattern", "%d [%t] %-5level: %msg%n%throwable");
-//
-//        console.add(standard);
-//        file.add(standard);
-//
-//        RootLoggerComponentBuilder rootLogger = builder.newRootLogger("ERROR");
-//        rootLogger.add(builder.newAppenderRef("stdout"));
-//
-//        builder.add(rootLogger);
-//
-//        LoggerComponentBuilder logger = builder.newLogger("fr","ERROR");
-//        logger.add(builder.newAppenderRef("log"));
-//        logger.addAttribute("additivity", false);
-//
-//        builder.add(logger);
-//
-//        Configurator.initialize(builder.build());
-//
-//        Logger l = LogManager.getLogger(builder);
-//        l.error("grezmbvuiqgheuiorgoiuqsef bhguip");
-//        l.debug("vbnbuifdbnwlkmhayzufdenahfsid,ugnhqeuifgqdzufbggqefoi^ghqeuivgp");
-//
-//        builder.writeXmlConfiguration(System.out);
-
-
-
-
-        LOGGER.error(APP, "ERREUR");
-        LOGGER.debug(APP,"DEBUG GENTIL MONSIEUR");
-        LOGGER.warn(APP, "ATTENTION");
-        LOGGER.info(APP, "Informations");
-        LOGGER.trace(APP, "TRACE DE PNEU");
-        LOGGER.fatal(APP, "FATAL BAZOOKA");
-
-
-        //        new UserService().inscriptionClient(inscription);
+        new UserService().inscriptionClient(inscription);
+        LOGGER.info(APP,String.format("Nouvel utilisateur enregistré %s",prenom));
         this.getServletContext().getRequestDispatcher("/WEB-INF/confirmation.jsp").forward(req, resp);
     }
 }
 
 /*TODO
-Interdire inscription quand session pleine
  */

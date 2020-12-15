@@ -16,22 +16,23 @@
     <c:out value="${pourcentage} %" />
 </div>
 <div>
+<c:if test="${pourcentage<100}">
 <form action="/LO54/Inscriptions?id=${session.id}" method="post">
     <div>
         <label for="last_name">Nom :</label>
-        <input type="text" id="last_name" name="user_name">
+        <input type="text" id="last_name" minlength="3" name="user_name">
     </div>
     <div>
         <label for="first_name">Prénom :</label>
-        <input type="text" id="first_name" name="user_firstname">
+        <input type="text" id="first_name" minlength="3" name="user_firstname">
     </div>
     <div>
          <label for="address">Adresse complète :</label>
-         <input type="text" id="address" name="user_address">
+         <input type="text" id="address" minlength="10" name="user_address">
     </div>
     <div>
             <label for="phone">Numéro de téléphone :</label>
-            <input type="text" id="phone" name="user_phone">
+            <input type="text" id="phone" pattern="[0-9]{10}" name="user_phone">
         </div>
     <div>
         <label for="mail">e-mail :</label>
@@ -41,6 +42,11 @@
         <button type="submit">S inscrire</button>
     </div>
 </form>
+</c:if>
+<c:if test="${pourcentage==100}">
+Le cours est plein, essayez en un autre:
+<a href="/LO54" >Retour à l'accueil</a>
+</c:if>
 </div>
 </body>
 </html>
