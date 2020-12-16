@@ -7,11 +7,9 @@
     <meta charset="utf8">
 </head>
 <body>
-Vous avez été inscrit avec succès
-
-<div class="button">
-        <a href="/LO54" >Retour à l'accueil</a>
-    </div>
-</div>
+    Vous avez été inscrit avec succès
+        <div class="button">
+            <a href="/LO54" >Retour à l'accueil</a>
+        </div>
 </body>
 </html>

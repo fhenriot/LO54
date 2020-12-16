@@ -2,15 +2,10 @@ package fr.utbm.lo54.servlets;
 
 import fr.utbm.lo54.beans.CourseSession;
 import fr.utbm.lo54.beans.User;
-import fr.utbm.lo54.service.CourseService;
 import fr.utbm.lo54.service.CourseSessionService;
-import fr.utbm.lo54.service.LocationService;
 import fr.utbm.lo54.service.UserService;
 import org.apache.logging.log4j.*;
-import org.apache.logging.log4j.core.Filter;
-import org.apache.logging.log4j.core.config.Configurator;
-import org.apache.logging.log4j.core.config.builder.api.*;
-import org.apache.logging.log4j.core.config.builder.impl.BuiltConfiguration;
+
 
 import javax.persistence.NoResultException;
 import javax.servlet.ServletException;
@@ -19,7 +14,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.List;
+
 
 
 

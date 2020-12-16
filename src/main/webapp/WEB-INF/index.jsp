@@ -11,7 +11,7 @@
       <div>
         <form id ="filterForm" action="" method="post">
           <div>
-          <label for="keyWord">Mot clé</label>
+            <label for="keyWord">Mot clé</label>
             <input type="text" id="keyWord" name="keyWord" value="<c:out value='${keyWord}'/>" onchange="document.getElementById('filterForm').submit();console.log(this.value);">
           </div>
           <div>

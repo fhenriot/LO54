@@ -1,20 +1,15 @@
 package fr.utbm.lo54.servlets;
 
-import fr.utbm.lo54.beans.Location;
-import fr.utbm.lo54.repository.LocationDAO;
+
 import fr.utbm.lo54.service.CourseSessionService;
-import fr.utbm.lo54.service.CourseService;
 import fr.utbm.lo54.service.LocationService;
-import fr.utbm.lo54.service.UserService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.apache.logging.log4j.Marker;
 import org.apache.logging.log4j.MarkerManager;
 import org.hibernate.service.spi.ServiceException;
 
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
