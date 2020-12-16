@@ -37,13 +37,13 @@ public class CourseSessionDAO {
         }
         String whereCourse = "where ";
         if (keyWord.length()>0 && city.length()>0) {
-            whereCourse+="course.title like CONCAT('%',?1,'%') or location.id=?2 or ";
+            whereCourse+="course.title like CONCAT('%',?1,'%') and location.id=?2 and ";
         }
         else if (keyWord.length()>0){
-            whereCourse+="course.title like CONCAT('%',?2,'%') or ";
+            whereCourse+="course.title like CONCAT('%',?2,'%') and ";
         }
         else if (city.length()>0){
-            whereCourse+="location.id=?2 or ";
+            whereCourse+="location.id=?2 and ";
         }
         whereCourse+="(start_date>=?3 and start_date<?4)";
         List<CourseSession> sessions = new ArrayList<>();
@@ -72,15 +72,15 @@ public class CourseSessionDAO {
         if (city == null) {
             city="";
         }
-        String whereCourse = "where start_date>=?1 and ";
+        String whereCourse = "where start_date>=?1 ";
         if (keyWord.length()>0 && city.length()>0) {
-            whereCourse+="(course.title like CONCAT('%',?2,'%') or location.id=?3)";
+            whereCourse+="and (course.title like CONCAT('%',?2,'%') and location.id=?3)";
         }
         else if (keyWord.length()>0){
-            whereCourse+="course.title like CONCAT('%',?2,'%')";
+            whereCourse+="and course.title like CONCAT('%',?2,'%')";
         }
         else if (city.length()>0){
-            whereCourse+="location.id=?2";
+            whereCourse+="and location.id=?2";
         }
         List<CourseSession> sessions = new ArrayList<>();
         entityManager = entityManagerFactory.createEntityManager();
